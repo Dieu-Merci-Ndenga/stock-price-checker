@@ -5,15 +5,15 @@ const bodyParser  = require('body-parser');
 const cors        = require('cors');
 
 require("./DB-module");
-const helmet = require('helmet')
+const helmet = require('helmet');
 
-const apiRoutes         = require('./routes/api.js');
-const fccTestingRoutes  = require('./routes/fcctesting.js');
+const apiRoutes         = require('./api.js');
+const fccTestingRoutes  = require('./fcctesting.js');
 const runner            = require('./test-runner');
 
 const app = express();
 
-app.use('/public', express.static(process.cwd() + '/public'));
+app.use('/public', express.static(process.cwd()));
 
 app.use(cors({origin: '*'})); //For FCC testing purposes only
 
@@ -28,7 +28,7 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'"],
-      scriptSrc: ["'self'", "trusted-cdn.com"] 
+      scriptSrc: ["'self'"]
     }
   },
   dnsPrefetchControl: false
@@ -39,7 +39,7 @@ app.enable('trust proxy')
 //Index page (static HTML)
 app.route('/')
   .get(function (req, res) {
-    res.sendFile(process.cwd() + '/views/index.html');
+    res.sendFile(process.cwd() + '/index.html');
   });
 
 //For FCC testing purposes

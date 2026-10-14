@@ -1,8 +1,12 @@
 'use strict';
 
 require("dotenv").config();
-const Stocks  = require('../models');
+const Stocks  = require('./models');
 const fetch = require('node-fetch');
+const crypto = require('crypto');
+
+const anonymizeIp = (ip) =>
+  crypto.createHash('sha256').update(ip || '').digest('hex');
 
 const saveStock = (symbol, like, ip) =>
   Stocks.findOne({ symbol }).then((res) => {
@@ -53,6 +57,7 @@ const parseData = (data) => {
 module.exports = function (app) {
   app.route('/api/stock-prices').get(function (req, res) {
     let { stock, like } = req.query;
+    const shouldLike = like === true || like === 'true';
 
     if (!Array.isArray(stock)) {
       stock = [stock];
@@ -60,7 +65,7 @@ module.exports = function (app) {
 
     const promises = [];
     stock.forEach((symbol) => {
-      promises.push(saveStock(symbol.toLowerCase(), like, req.ip));
+      promises.push(saveStock(symbol.toLowerCase(), shouldLike, anonymizeIp(req.ip)));
 
       promises.push(getStockPrice(symbol));
     });
