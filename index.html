@@ -8,47 +8,81 @@
     <link rel="stylesheet" href="./public/style.css" />
   </head>
   <body>
-    <header>
-      <h1>ISQA_5 - NotSure's Stock Price Checker</h1>
-    </header>
-    <div id="userstories">
-      <h3>Example usage:</h3>
-      <code>/api/stock-prices?stock=GOOG</code>
-      <br />
-      <code>/api/stock-prices?stock=GOOG&amp;like=true</code>
-      <br />
-      <code>/api/stock-prices?stock=GOOG&amp;stock=MSFT</code>
-      <br />
-      <code>/api/stock-prices?stock=GOOG&amp;stock=MSFT&amp;like=true</code>
-      <br />
-      <h3>Example return:</h3>
-      <code>{"stockData":{"stock":"GOOG","price":786.90,"likes":1}}</code>
-      <br />
-      <code>
-        {"stockData":[{"stock":"MSFT","price":62.30,"rel_likes":-1},{"stock":"GOOG","price":786.90,"rel_likes":1}]}
-      </code>
-    </div>
-    <hr class="p-50" />
-    <div id="testui">
-      <h2 class="text-align-left">Front-End:</h2>
-      <h3>Get single price and total likes</h3>
-      <form id="testForm2" class="border">
-        <input type="text" name="stock" placeholder="GOOG" required="" />
-        <input type="checkbox" name="like" value="true" /> Like?
-        <br />
-        <button type="submit">Get Price!</button>
-      </form>
-      <h3>Compare and get relative likes</h3>
-      <form id="testForm" class="border">
-        <input type="text" name="stock" placeholder="GOOG" required="" />
-        <input type="text" name="stock" placeholder="MSFT" required="" />
-        <input type="checkbox" name="like" value="true" /> Like both?
-        <br />
-        <button type="submit">Get Price!</button>
-      </form>
-      <code id="jsonResult"></code>
-    </div>
-    <hr class="m-50 mt-200" />
+    <main class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="Tickerline home">
+          <span class="brand-mark">TL</span>
+          <span>Tickerline</span>
+        </a>
+        <span class="status-pill"><span></span> Live market lookup</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">A personal market desk</p>
+        <h1 id="page-title">Know the ticker.<br /><em>Read the signal.</em></h1>
+        <p class="intro-copy">A focused little tool for checking current prices and seeing which stocks have the strongest community pulse.</p>
+      </section>
+
+      <section class="workspace" aria-label="Stock lookup tools">
+        <article class="lookup-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-label">01 / Quick check</p>
+              <h2>Look up one stock</h2>
+            </div>
+            <span class="panel-icon">↗</span>
+          </div>
+          <p class="panel-copy">Get the latest quoted price and the total number of likes.</p>
+          <form id="testForm2" class="lookup-form">
+            <label for="single-stock">NASDAQ symbol</label>
+            <div class="input-row">
+              <input id="single-stock" type="text" name="stock" placeholder="AAPL" maxlength="8" autocomplete="off" required />
+              <button type="submit">Check price <span>→</span></button>
+            </div>
+            <label class="like-option"><input type="checkbox" name="like" value="true" /> <span>Like this stock</span></label>
+          </form>
+        </article>
+
+        <article class="lookup-panel accent-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-label">02 / Head to head</p>
+              <h2>Compare two stocks</h2>
+            </div>
+            <span class="panel-icon">↔</span>
+          </div>
+          <p class="panel-copy">Put two symbols side by side and compare their relative likes.</p>
+          <form id="testForm" class="lookup-form">
+            <label>NASDAQ symbols</label>
+            <div class="input-row compare-row">
+              <input type="text" name="stock" placeholder="AAPL" maxlength="8" autocomplete="off" required />
+              <span class="versus">vs</span>
+              <input type="text" name="stock" placeholder="MSFT" maxlength="8" autocomplete="off" required />
+              <button type="submit" aria-label="Compare stocks">→</button>
+            </div>
+            <label class="like-option"><input type="checkbox" name="like" value="true" /> <span>Like both stocks</span></label>
+          </form>
+        </article>
+      </section>
+
+      <section class="results-section" aria-live="polite">
+        <div class="results-heading">
+          <div>
+            <p class="section-label">Your readout</p>
+            <h2>Market snapshot</h2>
+          </div>
+          <span id="result-status">Ready when you are</span>
+        </div>
+        <div id="jsonResult" class="results-grid">
+          <div class="empty-state"><span>◎</span><p>Your next lookup will appear here.</p></div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span>Tickerline / Personal project</span>
+        <span>Prices supplied by the FreeCodeCamp stock proxy</span>
+      </footer>
+    </main>
     <script src="/public/script.js"></script>
   </body>
 </html>
