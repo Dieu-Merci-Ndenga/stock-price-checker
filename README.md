@@ -28,3 +28,7 @@ Set `NODE_ENV=test` to run the five FreeCodeCamp functional tests during startup
 - `models.js` and `DB-module.js` manage the MongoDB persistence layer.
 - `tests/2_functional-tests.js` contains the end-to-end API checks.
 # [Stock Price Checker](https://freecodecamp.org/learn/information-security/information-security-projects/stock-price-checker)
+
+## License
+
+This project is licensed under the MIT License — see the `LICENSE` file for details.
