@@ -30,4 +30,4 @@ Set `NODE_ENV=test` to run the five FreeCodeCamp functional tests during startup
 
 ## License
 
-This project is licensed under the MIT License — see the `MIT` file for details.
+This project is licensed under the [MIT License](https://opensource.org/license/MIT) — see the `MIT` file for details.
